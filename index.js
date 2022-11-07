@@ -43,33 +43,33 @@ const quizInput = [
 
 // FREECODECAMP.ORG BELOW = SOURCE
 // we use "let" due to the fact that we want these variables to be changeable
-let currentQuiz = 0;
+let presentData = 0;
 let quizScore = 0;
 
 //Check Understanding: selecting all the elements from the html
-// we use "const" due to the fact that we want the a non-editable variable.
+// we use "const" due to the fact that we want a non-editable variable.
 
 const quiz = document.getElementById("quiz"); // actual quiz box
 const answerOr = document.querySelectorAll(".answer"); // selecting radio input group
 const questionsOr = document.getElementById("question"); // where questions prompt
-const a_text = document.getElementById("a-text"); // a answer prompts
-const b_text = document.getElementById("b-text"); // b answer prompts
-const c_text = document.getElementById("c-text"); // c answer prompts
-const d_text = document.getElementById("d-text"); // d answer prompts
-const submitButn = document.getElementById("submit");
+const a_option = document.getElementById("a-option"); // a answer prompts
+const b_option= document.getElementById("b-option"); // b answer prompts
+const c_option = document.getElementById("c-option"); // c answer prompts
+const d_option = document.getElementById("d-option"); // d answer prompts
+const submitButn = document.getElementById("submit"); // submit button
 
-loadQuiz();
+loadQuiz(); // function loads the quiz making sure answers aren't selected and there is no score yet (fresh slate)
 
 function loadQuiz() {
     deselectAnswers();
 
-    const currentQuizData = quizInput[currentQuiz];
+    const quizData = quizInput[presentData];
 
-    questionsOr.innerText = currentQuizData.question;
-    a_text.innerText = currentQuizData.a;
-    b_text.innerText = currentQuizData.b;
-    c_text.innerText = currentQuizData.c;
-    d_text.innerText = currentQuizData.d;
+    questionsOr.innerText = quizData.question;
+    a_option.innerText = quizData.a; 
+    b_option.innerText = quizData.b;
+    c_option.innerText = quizData.c;
+    d_option.innerText = quizData.d;
 }
 
 function deselectAnswers() {
@@ -89,13 +89,13 @@ function getAnswer() {
 submitButn.addEventListener("click", () => {
     const answer = getAnswer();
     if (answer) {
-        if (answer === quizInput[currentQuiz].correct) {
+        if (answer === quizInput[presentData].correct) {
             quizScore++;
         }
 
-        currentQuiz++;
+        presentData++;
 
-        if (currentQuiz < quizInput.length) {
+        if (presentData < quizInput.length) {
             loadQuiz();
         } else {
             quiz.innerHTML = `
